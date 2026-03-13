@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>栖图 — 专业鸟片筛选与管理</title>
+  <link rel="icon" href="ph.bird-fill.ico" type="image/x-icon" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Noto Sans SC"', 'system-ui', 'sans-serif'] },
+          colors: {
+            primary: { DEFAULT: '#0D9488', dark: '#0F766E', light: '#14B8A6' },
+            accent: { DEFAULT: '#D97706', light: '#F59E0B' },
+            surface: { glass: 'rgba(255,255,255,0.85)', glassBorder: 'rgba(255,255,255,0.4)' }
+          },
+        }
+      }
+    };
+  </script>
+  <style>
+    @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+  </style>
+</head>
+<body class="font-sans antialiased text-slate-800 min-h-screen bg-gradient-to-b from-slate-200/80 via-slate-100 to-slate-200/80">
+  <!-- Hero -->
+  <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-br from-slate-800 via-teal-900/95 to-slate-900"></div>
+    <div class="absolute inset-0 -z-10 opacity-30" style="background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(20,184,166,0.25), transparent 60%);"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-40 -z-10 bg-gradient-to-t from-slate-100 to-transparent"></div>
+
+    <a href="#" class="absolute top-6 left-6 sm:top-8 sm:left-8 z-10 flex items-center justify-center rounded-xl transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent" aria-label="栖图 首页">
+      <img src="ph.bird-fill.ico" alt="" class="w-12 h-12 sm:w-14 sm:h-14 object-contain" width="56" height="56" />
+    </a>
+
+    <div class="w-full flex items-center justify-center px-4 sm:px-6 text-center">
+      <div class="w-[80vw] min-h-[75vh] max-w-6xl rounded-3xl bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl px-8 sm:px-14 py-16 sm:py-24 flex flex-col items-center justify-center gap-10 sm:gap-14 [&>*]:flex-shrink-0">
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold" style="color: #4594F1">栖图</h1>
+        <p class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white/95 leading-relaxed text-center">获取栖图，轻松筛选你的图片 — 专业鸟片管理与筛选，让每一张好图触手可及。</p>
+        <a href="#download" class="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-xl bg-white text-slate-800 font-semibold text-xl hover:bg-white/95 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent transition-colors duration-200 cursor-pointer shadow-lg" aria-label="跳转到版本下载列表">立即下载</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-12 sm:py-20" aria-labelledby="features-heading">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="rounded-3xl bg-white/95 backdrop-blur-sm border border-slate-200/80 shadow-xl shadow-slate-200/50 px-6 py-12 sm:px-10 sm:py-16">
+        <h2 id="features-heading" class="text-2xl sm:text-3xl font-semibold text-slate-800 text-center mb-12 sm:mb-16">产品特性</h2>
+
+        <div class="space-y-20 sm:space-y-24">
+          <article class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div class="order-2 lg:order-1 rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-50/50 shadow-lg aspect-video lg:aspect-auto lg:min-h-[260px]">
+            <img src="pic/feature1.png" alt="便捷的分类管理" class="w-full h-full object-cover" width="600" height="340" loading="lazy" />
+          </div>
+          <div class="order-1 lg:order-2">
+            <h3 class="text-xl sm:text-2xl font-semibold text-slate-800 mb-3">便捷的分类管理</h3>
+            <p class="text-slate-600 leading-relaxed">支持多种分类方式，用户可以根据鸟类种类、拍摄地点等进行细致分类。</p>
+          </div>
+        </article>
+
+        <article class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div class="rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-50/50 shadow-lg aspect-video lg:aspect-auto lg:min-h-[260px]">
+            <img src="pic/feature2.png" alt="高效的导入管理" class="w-full h-full object-cover" width="600" height="340" loading="lazy" />
+          </div>
+          <div>
+            <h3 class="text-xl sm:text-2xl font-semibold text-slate-800 mb-3">高效的导入管理</h3>
+            <p class="text-slate-600 leading-relaxed">支持快速导入图库，确保您的图片整理井然有序。</p>
+          </div>
+        </article>
+
+        <article class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div class="order-2 lg:order-1 rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-50/50 shadow-lg aspect-video lg:aspect-auto lg:min-h-[260px]">
+            <img src="pic/feature3.png" alt="精准的对焦检测" class="w-full h-full object-cover" width="600" height="340" loading="lazy" />
+          </div>
+          <div class="order-1 lg:order-2">
+            <h3 class="text-xl sm:text-2xl font-semibold text-slate-800 mb-3">精准的对焦检测</h3>
+            <p class="text-slate-600 leading-relaxed">支持自动检测图片是否对焦到鸟身上、鸟眼上，支持多种数据综合判断图片清晰度，助力您高效筛选图片。</p>
+          </div>
+        </article>
+
+        <article class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div class="rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-50/50 shadow-lg aspect-video lg:aspect-auto lg:min-h-[260px]">
+            <img src="pic/feature4.png" alt="完善的对比功能" class="w-full h-full object-cover" width="600" height="340" loading="lazy" />
+          </div>
+          <div>
+            <h3 class="text-xl sm:text-2xl font-semibold text-slate-800 mb-3">完善的对比功能</h3>
+            <p class="text-slate-600 leading-relaxed">支持进入大图模式使用多种功能对比图片差异，帮助您挑选最佳图片。</p>
+          </div>
+        </article>
+
+        <article class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div class="order-2 lg:order-1 rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-50/50 shadow-lg aspect-video lg:aspect-auto lg:min-h-[260px]">
+            <img src="pic/feature5.png" alt="更多功能等你探索" class="w-full h-full object-cover" width="600" height="340" loading="lazy" />
+          </div>
+          <div class="order-1 lg:order-2">
+            <h3 class="text-xl sm:text-2xl font-semibold text-slate-800 mb-3">更多功能等你探索</h3>
+            <p class="text-slate-600 leading-relaxed">水印、地图、数据图表等等功能等你探索。</p>
+          </div>
+        </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download -->
+  <section id="download" class="py-12 sm:py-20 scroll-mt-4" aria-labelledby="download-heading">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="rounded-3xl bg-white/95 backdrop-blur-sm border border-slate-200/80 shadow-xl shadow-slate-200/50 px-6 py-12 sm:px-10 sm:py-16 max-w-2xl mx-auto">
+        <h2 id="download-heading" class="text-2xl sm:text-3xl font-semibold text-slate-800 text-center mb-10">下载</h2>
+        <ul id="version-list" class="space-y-4" role="list">
+          <li>
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 rounded-2xl border border-slate-200/80 bg-slate-50/70 hover:border-primary/40 hover:bg-slate-50/90 transition-colors duration-200 shadow-sm">
+            <div>
+              <span class="text-lg font-medium text-slate-800">V0.0.3</span>
+              <p class="text-sm text-slate-500 mt-1">修复若干问题，优化导入与对焦检测。</p>
+            </div>
+            <a href="https://pan.baidu.com/s/19389Rk8WybhsdJhuYjffJg?pwd=61k4" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#2932E1] text-white font-medium hover:bg-[#1e26b8] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200 cursor-pointer flex-shrink-0" aria-label="在百度网盘下载 V0.0.3">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-5 5 5h-4v4h-2z"/></svg>
+              百度网盘
+            </a>
+          </div>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </section>
+  <script>
+    window.VERSION_LIST_FALLBACK = [
+      ['V0.0.3', '修复若干问题，优化导入与对焦检测', 'https://pan.baidu.com/s/19389Rk8WybhsdJhuYjffJg?pwd=61k4'],
+    ];
+  </script>
+  <script>
+    (function () {
+      var listEl = document.getElementById('version-list');
+      if (!listEl) return;
+      function escapeHtml(s) {
+        var d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+      }
+      function render(items) {
+        if (!items || items.length === 0) return;
+        var html = '';
+        items.forEach(function (item) {
+          var version = item[0], desc = item[1] || '', url = item[2];
+          if (!version || !url) return;
+          html += '<li><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 rounded-2xl border border-slate-200/80 bg-slate-50/70 hover:border-primary/40 hover:bg-slate-50/90 transition-colors duration-200 shadow-sm">';
+          html += '<div><span class="text-lg font-medium text-slate-800">' + escapeHtml(version) + '</span>';
+          if (desc) html += '<p class="text-sm text-slate-500 mt-1 whitespace-pre-line">' + escapeHtml(desc) + '</p>';
+          html += '</div>';
+          html += '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#2932E1] text-white font-medium hover:bg-[#1e26b8] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200 cursor-pointer flex-shrink-0" aria-label="在百度网盘下载 ' + escapeHtml(version) + '">';
+          html += '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-5 5 5h-4v4h-2z"/></svg>百度网盘</a></div></li>';
+        });
+        listEl.innerHTML = html;
+      }
+      function parseTxt(text) {
+        text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+        var blocks = text.split(/\n\s*---\s*\n/).filter(function (b) { return b.trim(); });
+        var items = [];
+        blocks.forEach(function (block) {
+          var lines = block.trim().split(/\n/).map(function (line) { return line.trim(); }).filter(Boolean);
+          if (lines.length < 2) return;
+          var version = lines[0], url = lines[lines.length - 1];
+          if (!version || !url || url.indexOf('http') !== 0) return;
+          items.push([version, lines.slice(1, -1).join('\n'), url]);
+        });
+        return items;
+      }
+      if (window.VERSION_LIST_FALLBACK && window.VERSION_LIST_FALLBACK.length) render(window.VERSION_LIST_FALLBACK);
+      fetch('versions.txt')
+        .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+        .then(function (text) {
+          var items = parseTxt(text);
+          if (items.length) render(items);
+        })
+        .catch(function () {});
+    })();
+  </script>
+
+  <!-- Contact -->
+  <footer class="py-16 sm:py-24 bg-slate-800/95 text-slate-300 border-t border-slate-700/80 mt-4" aria-label="联系方式">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8 text-center">
+      <p class="text-lg sm:text-xl font-medium text-slate-400 mb-6 sm:mb-8">联系方式</p>
+      <ul class="flex flex-col sm:flex-row justify-center gap-6 sm:gap-12 text-base sm:text-lg">
+        <li>QQ：<a href="https://wpa.qq.com/msgrd?v=3&uin=1401330388&site=qq&menu=yes" target="_blank" rel="noopener noreferrer" class="text-primary-light hover:text-white transition-colors duration-200 cursor-pointer focus:outline-none focus:underline">1401330388</a></li>
+        <li>QQ 群：962628584</li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>
