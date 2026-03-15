@@ -113,6 +113,11 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="rounded-3xl bg-white/95 backdrop-blur-sm border border-slate-200/80 shadow-xl shadow-slate-200/50 px-6 py-12 sm:px-10 sm:py-16 max-w-2xl mx-auto">
         <h2 id="download-heading" class="text-2xl sm:text-3xl font-semibold text-slate-800 text-center mb-10">下载</h2>
+        <!-- 版本说明文字 -->
+        <div class="mb-6 text-sm text-slate-600 space-y-2">
+          <p>本软件采取大版本（如 V0.0.3、V0.0.4）与升级包（如 V0.0.4-update1）并行策略，首次下载可选择最新版本的大版本，然后安装此版本下最新的升级包即可</p>
+          <p>从 V0.0.4 开始，每个大版本都会打包完整包，升级版本只有升级包，每个大版本的升级包都是与临近的上个大版本的升级</p>
+        </div>
         <ul id="version-list" class="space-y-4" role="list">
           <li>
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 rounded-2xl border border-slate-200/80 bg-slate-50/70 hover:border-primary/40 hover:bg-slate-50/90 transition-colors duration-200 shadow-sm">
@@ -144,21 +149,67 @@
         d.textContent = s;
         return d.innerHTML;
       }
+      // Check if it's an update version (contains -update)
+      function isUpdateVersion(version) {
+        return /-update/i.test(version);
+      }
+      // Render download button
+      function renderDownloadBtn(url, label, version) {
+        return '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#2932E1] text-white font-medium hover:bg-[#1e26b8] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200 cursor-pointer flex-shrink-0" aria-label="' + escapeHtml(label) + ' ' + escapeHtml(version) + '">' +
+               '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-5 5 5h-4v4h-2z"/></svg>' + escapeHtml(label) + '</a>';
+      }
       function render(items) {
         if (!items || items.length === 0) return;
         var html = '';
         items.forEach(function (item) {
-          var version = item[0], desc = item[1] || '', url = item[2];
-          if (!version || !url) return;
-          html += '<li><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 rounded-2xl border border-slate-200/80 bg-slate-50/70 hover:border-primary/40 hover:bg-slate-50/90 transition-colors duration-200 shadow-sm">';
-          html += '<div><span class="text-lg font-medium text-slate-800">' + escapeHtml(version) + '</span>';
+          var version = item[0], desc = item[1] || '', urlFull = item[2], urlUpdate = item[3];
+          if (!version) return;
+          var isUpdate = isUpdateVersion(version);
+          // Major version needs full package link; update version needs at least one link
+          if (!isUpdate && !urlFull) return;
+          if (isUpdate && !urlFull && !urlUpdate) return;
+          // Major version uses thick border and blue text
+          var containerClass = isUpdate
+            ? 'flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 rounded-2xl border border-slate-200/80 bg-slate-50/70 hover:border-primary/40 hover:bg-slate-50/90 transition-colors duration-200 shadow-sm'
+            : 'flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 rounded-2xl border-2 border-[#4594F1] bg-slate-50/70 hover:bg-slate-50/90 transition-colors duration-200 shadow-sm';
+          var versionClass = isUpdate
+            ? 'text-lg font-medium text-slate-800'
+            : 'text-2xl font-bold text-[#4594F1]';
+          html += '<li><div class="' + containerClass + '">';
+          html += '<div><span class="' + versionClass + '">' + escapeHtml(version) + '</span>';
           if (desc) html += '<p class="text-sm text-slate-500 mt-1 whitespace-pre-line">' + escapeHtml(desc) + '</p>';
           html += '</div>';
-          html += '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#2932E1] text-white font-medium hover:bg-[#1e26b8] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200 cursor-pointer flex-shrink-0" aria-label="在百度网盘下载 ' + escapeHtml(version) + '">';
-          html += '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-5 5 5h-4v4h-2z"/></svg>百度网盘</a></div></li>';
+          // Button area - vertical layout with label left of button
+          html += '<div class="flex flex-col gap-3 flex-shrink-0">';
+          if (!isUpdate) {
+            // Major version: show both full package and update package buttons with labels
+            if (urlFull) {
+              html += '<div class="flex items-center gap-3">';
+              html += '<span class="text-sm text-slate-600 w-12 text-right">完整包</span>';
+              html += renderDownloadBtn(urlFull, '百度网盘', version);
+              html += '</div>';
+            }
+            if (urlUpdate) {
+              html += '<div class="flex items-center gap-3">';
+              html += '<span class="text-sm text-slate-600 w-12 text-right">升级包</span>';
+              html += renderDownloadBtn(urlUpdate, '百度网盘', version);
+              html += '</div>';
+            }
+          } else {
+            // Update version: show only one button
+            var url = urlUpdate || urlFull;
+            html += renderDownloadBtn(url, '百度网盘', version);
+          }
+          html += '</div></div></li>';
         });
         listEl.innerHTML = html;
       }
+      // Parse new version format:
+      // Version
+      // Description (can be multiple lines)
+      // link:full_package_url (required for major version, optional for update)
+      // link:update_package_url (optional)
+      // ---
       function parseTxt(text) {
         text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
         var blocks = text.split(/\n\s*---\s*\n/).filter(function (b) { return b.trim(); });
@@ -166,9 +217,31 @@
         blocks.forEach(function (block) {
           var lines = block.trim().split(/\n/).map(function (line) { return line.trim(); }).filter(Boolean);
           if (lines.length < 2) return;
-          var version = lines[0], url = lines[lines.length - 1];
-          if (!version || !url || url.indexOf('http') !== 0) return;
-          items.push([version, lines.slice(1, -1).join('\n'), url]);
+          var version = lines[0];
+          // Collect links starting with "link:" (button links)
+          var urls = [];
+          var descLines = [];
+          for (var i = 1; i < lines.length; i++) {
+            var line = lines[i];
+            if (line.toLowerCase().indexOf('link:') === 0) {
+              urls.push(line.substring(5).trim());
+            } else {
+              descLines.push(line);
+            }
+          }
+          if (urls.length === 0) return;
+          var isUpdate = isUpdateVersion(version);
+          var urlFull = '', urlUpdate = '';
+          if (isUpdate) {
+            // Update version: first link as update package, second (if any) as full package
+            urlUpdate = urls[0];
+            urlFull = urls[1] || '';
+          } else {
+            // Major version: first link as full package, second (if any) as update package
+            urlFull = urls[0];
+            urlUpdate = urls[1] || '';
+          }
+          items.push([version, descLines.join('\n'), urlFull, urlUpdate]);
         });
         return items;
       }
