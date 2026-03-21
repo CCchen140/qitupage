@@ -1,3 +1,9 @@
+V0.0.4-update1
+修复一些bug
+优化缩略图的显示流畅度
+添加自动升级功能
+link:https://pan.baidu.com/s/1qFljwoOS3OCvmEUTNiYrKQ?pwd=jvdm
+---
 V0.0.4
 增加添加水印功能
 增加数据图标功能
